@@ -16,20 +16,23 @@ color[] sunColors = {
 
 void setup() {
   // 1. Set the size of your sketch
-  
+  size(500,500);
 }
 
 
 void draw() {
   // 2. Draw the bgColor background color
-
+background(bgColor);
   /*
    * PART 1: Drawing the sun
    */
 
   // Draw an ellipse for the sun in the center of the window
+  ellipse(250, 250, 250, 250);
   // Use fill(sunColors[0]) to make it yellow
+  fill(sunColors[0]);
   // Use noStroke() to remove the black outline
+  noStroke();
 
   // Do you see a yellow sun like in the 1st image?
   // If not, fix your code before proceeding.
@@ -44,16 +47,23 @@ void draw() {
   // Call the loadPixels() method to put all the pixel colors into
   // the pixels[] array
   // https://processing.org/reference/loadPixels_.html
-
+loadPixels();
   // Loop through all the pixels in your window.
   // By default, a pixel is a 1x1 colored square, so if the window width is 600 
   // and the height is 400 (600x400), then there are 600 * 400 = 240,000 pixels 
+for(int i = 0; i<pixels.length;i++){
+
 
     // We want to change the color of our sun so use an if statement
-    // to check if the pixel is the color of the yellow circle. 
-
+    // to check if the pixel is the color of the yellow circle.
+    if(pixels[i]==sunColors[0]){
+    
+    
       // If it's the same color we need to map the pixel to a
       // color in our sunColors[] array (see 2nd gradient image)
+
+
+    
 
       // The top of the sun is yellow (sunColors[0]) and the bottom
       // of the sun is red (sunColors[sunColors.length - 1]
@@ -61,15 +71,22 @@ void draw() {
       // In order to get the right color, the y value from the top of
       // the sun to the bottom has to be mapped to a range from 0 to 1.
       // Use the map() function to do that:
-      // int y = i / width;
-      // float step = map(y, sunTopY, sunBottomY, 0, 1);
-
+       //int y = i / width;
+       //float step = map(y, sunTopY, sunBottomY, 0, 1);
+       
+        int y = i / width;
+        float step = map(y, height/2+125, height/2-125, 0, 1);
+        
       // Call interpolateColor(sunColors, step) and save the color
       // variable that's returned
-
+      color interpolate;
+interpolate = interpolateColor(sunColors, step);
+    
       // Set pixels[i] to the returned color 
 
-
+pixels[i]=interpolate;
+    }
+}
   // Call updatePixels() after your loop through all the pixels to
   // update the pixel colors
   // https://processing.org/reference/updatePixels_.html

@@ -28,12 +28,12 @@ background(bgColor);
    */
 
   // Draw an ellipse for the sun in the center of the window
-  ellipse(250, 250, 250, 250);
+  
   // Use fill(sunColors[0]) to make it yellow
   fill(sunColors[0]);
   // Use noStroke() to remove the black outline
   noStroke();
-
+ellipse(250, 250, 250, 250);
   // Do you see a yellow sun like in the 1st image?
   // If not, fix your code before proceeding.
 
@@ -58,13 +58,9 @@ for(int i = 0; i<pixels.length;i++){
     // to check if the pixel is the color of the yellow circle.
     if(pixels[i]==sunColors[0]){
     
-    
       // If it's the same color we need to map the pixel to a
       // color in our sunColors[] array (see 2nd gradient image)
-
-
-    
-
+      
       // The top of the sun is yellow (sunColors[0]) and the bottom
       // of the sun is red (sunColors[sunColors.length - 1]
 
@@ -75,22 +71,20 @@ for(int i = 0; i<pixels.length;i++){
        //float step = map(y, sunTopY, sunBottomY, 0, 1);
        
         int y = i / width;
-        float step = map(y, height/2+125, height/2-125, 0, 1);
+        float step = map(y, height/2+125, height/2-125, 1, 0);
         
       // Call interpolateColor(sunColors, step) and save the color
       // variable that's returned
-      color interpolate;
-interpolate = interpolateColor(sunColors, step);
+color interpolate = interpolateColor(sunColors, step);
     
       // Set pixels[i] to the returned color 
-
 pixels[i]=interpolate;
     }
 }
   // Call updatePixels() after your loop through all the pixels to
   // update the pixel colors
   // https://processing.org/reference/updatePixels_.html
-
+updatePixels();
   /*
    * PART 3: Drawing the missing sections at the bottom of the sun
    *
@@ -99,19 +93,24 @@ pixels[i]=interpolate;
    */
 
   // Set the fill color to the background color
-
+fill(bgColor);
   // To draw each rectangle we need to find its x, y, width, height
   // *The y position can be any value within the sun:
   //   float y = width / 2;
+  float y = width/2;
   // *The height can be any value you choose:
   //   float h = 40;
+  float h = 40;
   // *The x position can be the center of the sun's x position minus the radius:
   //   float x = sunCenterX - sunRadius
+  float x = 250-125;
   // * The width can be 2 times the radius
   //   float w = 2 * sunRadius
+  float w = 2*125;
 
   // Do you see a section missing from the sun like in the 3rd image?
 
+rect(x,y,w,h);
 
   /*
    * PART 4: Moving the missing sun sections

@@ -13,10 +13,13 @@ color[] sunColors = {
   color(217, 11, 139), 
   color(217, 0, 151)
 };
-
+float y;
+float h;
 void setup() {
   // 1. Set the size of your sketch
   size(500,500);
+y=height/2+125;
+h=40;
 }
 
 
@@ -97,10 +100,10 @@ fill(bgColor);
   // To draw each rectangle we need to find its x, y, width, height
   // *The y position can be any value within the sun:
   //   float y = width / 2;
-  float y = width/2;
+ // float y = width/2;
   // *The height can be any value you choose:
   //   float h = 40;
-  float h = 40;
+  //float h = 40;
   // *The x position can be the center of the sun's x position minus the radius:
   //   float x = sunCenterX - sunRadius
   float x = 250-125;
@@ -122,7 +125,19 @@ rect(x,y,w,h);
   // Decrease the y variable of the rectangular section created in PART 3.
   // If there isn't a variable, declare a float variable OUTSIDE of the
   // draw function AND initialize it in the setup() function.
-
+if(y==125){
+y=height/2+125;
+h=40;
+}
+else{
+y-=0.5;
+if(h<=0.1){
+h=0;
+}
+else{
+h-=0.1;
+}
+}
   // Do you see the rectangle moving upwards?
 
   // Pick a y positon to be the location when the sections stop moving up.
@@ -150,7 +165,7 @@ rect(x,y,w,h);
   // code you wrote for the 1 missing sun section.
   // *HINT* You can use the Rectangle class defined below to create
   //        a list of Rectangles.
-
+ArrayList<Rectangle> sections = new ArrayList<Rectangle>();
 
   /*
    * PART 6: Adding extras
